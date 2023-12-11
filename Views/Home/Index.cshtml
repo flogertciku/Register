@@ -1,0 +1,19 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row text-center">
+    <a asp-action="LogOut" > Log Out</a>
+    <div class="col-6">
+        <form asp-action="CreatePost" method="Post">
+            <div>
+                <label asp-for="Content"></label>
+                <input asp-for="Content">
+                <span asp-validation-for="Content"> </span>
+            </div>
+            <input type="submit" >
+        </form>
+    </div>
+
+   </div>
