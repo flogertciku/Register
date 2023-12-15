@@ -17,6 +17,7 @@ public class Post
     // Notice how we must use [Required] again here to apply to the next property
     public int? UserId {get;set;}
     public User? Creator {get;set;}
+    public List<Like>? Likes {get;set;}
     public DateTime CreatedAt {get;set;} = DateTime.Now;        
     public DateTime UpdatedAt {get;set;} = DateTime.Now;
     

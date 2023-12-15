@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-
+using Microsoft.EntityFrameworkCore;
 using Register.Models;
 
 namespace Register.Controllers;
@@ -43,6 +43,11 @@ public class HomeController : Controller
     [SessionCheck]
     public IActionResult Index()
     {
+        int? userId = HttpContext.Session.GetInt32("UserId");
+        ViewBag.userId =userId;
+        ViewBag.userPost = _context.Posts.Where(e=>e.UserId ==userId ).ToList();
+        ViewBag.otherPost = _context.Posts.Include(e=>e.Creator).Include(e=>e.Likes).Where(e=>e.UserId != userId).ToList();
+        // ViewBag.useri = _context.Users.FirstOrDefault(e=>e.UserId== userId);
         return View();
     }
 
@@ -52,7 +57,7 @@ public class HomeController : Controller
     }
     [HttpGet("register")]
     public IActionResult Register(){
-        return View();
+        return View("Auth");
     }
     [HttpPost("Create")]
     public IActionResult CreateUser(User userFromView){
@@ -65,32 +70,32 @@ public class HomeController : Controller
          _context.SaveChanges();
          return RedirectToAction("SignIn");   
         }
-        return View("Register");
+        return View("Auth");
     }
     [HttpGet("SignIn")]
     public IActionResult SignIn(){
         
-        return View();
+        return View("Auth");
     }
     [HttpPost("Login")]
     public IActionResult Login(SignIn userSubmission){
 
         if (ModelState.IsValid)
         {
-            User? userInDb = _context.Users.FirstOrDefault(u => u.Email == userSubmission.Email);        
+            User? userInDb = _context.Users.FirstOrDefault(u => u.Email == userSubmission.SEmail);        
         // If no user ex
         if (userInDb == null)
         {   
             ModelState.AddModelError("Email", "Invalid Email");            
-            return View("SignIn"); 
+            return View("Auth"); 
         }
         PasswordHasher<SignIn> hasher = new PasswordHasher<SignIn>();                    
         // Verify provided password against hash stored in db        
-        var result = hasher.VerifyHashedPassword(userSubmission, userInDb.Password, userSubmission.Password);   
+        var result = hasher.VerifyHashedPassword(userSubmission, userInDb.Password, userSubmission.SPassword);   
          if(result == 0)        
         {            
              ModelState.AddModelError("Password", "Invalid Password");            
-            return View("SignIn");       
+            return View("Auth");       
         }
         int UserId = userInDb.UserId;
         HttpContext.Session.SetInt32("UserId", userInDb.UserId);
@@ -100,12 +105,23 @@ public class HomeController : Controller
         }
         
 
-        return View("SignIn"); 
+        return View("Auth"); 
     }
     [HttpGet("LogOut")]
     public IActionResult LogOut(){
         HttpContext.Session.Clear();
         return RedirectToAction("SignIn");
+    }
+    [HttpGet("Like")]
+    public IActionResult Like(int id){
+        // Post posti = _context.Posts.FirstOrDefault(e=>e.PostId
+        Like newLike = new Like();
+        newLike.PostId = id;
+        newLike.UserId = HttpContext.Session.GetInt32("UserId");
+        _context.Add(newLike);
+        _context.SaveChanges();
+
+        return RedirectToAction("Index");
     }
     [HttpPost("CreatePost")]
     public IActionResult CreatePost(Post postiNgaView){

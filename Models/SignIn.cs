@@ -13,11 +13,11 @@ public class SignIn
     [Required]   
     // This will apply a standard Email format regex to this property 
     [EmailAddress]    
-    public string Email { get; set; }     
+    public string SEmail { get; set; }     
     
     [Required]    
     // You will see what the [DataType] annotation does when we get over to making our form
     [DataType(DataType.Password)]    
-    public string Password { get; set; } 
+    public string SPassword { get; set; } 
     
 }

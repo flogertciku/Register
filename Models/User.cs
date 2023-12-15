@@ -32,4 +32,5 @@ public class User
     [Compare("Password")]
     public string PasswordConfirm { get; set; }
     List<Post>? Post {get;set;}
+    List<Like>? Likes {get;set;}
 }

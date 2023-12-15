@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/fciku/Documents/DOCS/betaPlan/c#October/NET/Register
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/fciku/Documents/DOCS/betaPlan/c\#October/NET/Register/Views/Home/Auth.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BdXRoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/fciku/Documents/DOCS/betaPlan/c\#October/NET/Register/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -27,8 +31,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/fciku/Documents/DOCS/betaPlan/c\#October/NET/Register/Views/Home/SignIn.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9TaWduSW4uY3NodG1s
+[/Users/fciku/Documents/DOCS/betaPlan/c\#October/NET/Register/Views/Home/_SignIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9fU2lnbkluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/fciku/Documents/DOCS/betaPlan/c\#October/NET/Register/Views/Shared/Error.cshtml]

@@ -19,6 +19,33 @@ namespace Register.Migrations
                 .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Register.Models.Like", b =>
+                {
+                    b.Property<int>("LikeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LikeId");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("Register.Models.Post", b =>
                 {
                     b.Property<int>("PostId")
@@ -74,6 +101,21 @@ namespace Register.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Register.Models.Like", b =>
+                {
+                    b.HasOne("Register.Models.Post", "PostLike")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId");
+
+                    b.HasOne("Register.Models.User", "UserLike")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("PostLike");
+
+                    b.Navigation("UserLike");
+                });
+
             modelBuilder.Entity("Register.Models.Post", b =>
                 {
                     b.HasOne("Register.Models.User", "Creator")
@@ -81,6 +123,11 @@ namespace Register.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("Register.Models.Post", b =>
+                {
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

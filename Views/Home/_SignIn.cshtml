@@ -1,0 +1,21 @@
+@model SignIn
+
+
+<form asp-action="Login" method="post">
+
+<div>
+    <label asp-for="SEmail"></label>
+    <input asp-for="SEmail">
+    <span asp-validation-for="SEmail"></span>
+
+</div>
+<div>
+    <label asp-for="SPassword"></label>
+    <input asp-for="SPassword">
+    <span asp-validation-for="SPassword"></span>
+</div>
+
+
+<input type="submit" value="Log in">
+
+</form>
