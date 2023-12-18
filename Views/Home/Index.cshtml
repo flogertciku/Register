@@ -24,6 +24,7 @@
       <th scope="col">Creator</th>
       <th scope="col">Content</th>
       <th scope="col">Updated At</th>
+      <th scope="col">EditShow</th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +34,7 @@
       <td>ME</td>
       <td>@item.Content</td>
       <td>@item.UpdatedAt</td>
+      <td > <a asp-action="EditShow" asp-route-id="@item.PostId"> Edit</a> </td>
     </tr>
 }
     
@@ -69,7 +71,11 @@
       }
       @{ if(c <=0){
 <td> <a asp-action="like" asp-route-id="@item.PostId">Like</a></td>
-      }}
+      }else{
+     <td>   <a asp-action="unlike" asp-route-id="@item.PostId">Unlike</a></td>
+      }
+      
+      }
 
      
      

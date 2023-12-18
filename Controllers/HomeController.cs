@@ -123,6 +123,17 @@ public class HomeController : Controller
 
         return RedirectToAction("Index");
     }
+        [HttpGet("unlike")]
+    public IActionResult unlike(int id){
+        // Post posti = _context.Posts.FirstOrDefault(e=>e.PostId
+        int? UserId = HttpContext.Session.GetInt32("UserId");
+        Like likengaDb = _context.Likes.FirstOrDefault(e=> e.PostId== id && e.UserId== UserId);
+        _context.Remove(likengaDb);
+    
+        _context.SaveChanges();
+
+        return RedirectToAction("Index");
+    }
     [HttpPost("CreatePost")]
     public IActionResult CreatePost(Post postiNgaView){
         int? userId = HttpContext.Session.GetInt32("UserId");
@@ -135,6 +146,17 @@ public class HomeController : Controller
             return RedirectToAction("Index");
         }
         return View("Index");
+    }
+    [HttpGet("EditShow/{id}")]
+    public IActionResult EditShow(int id){
+
+        Post posti = _context.Posts.FirstOrDefault(e=>e.PostId == id);
+        List<Post> listMePoste = _context.Posts.Include(e=> e.Creator).Include(e=> e.Likes).Where(e=>e.PostId != id).ToList();
+        ManyData teDhenat = new ManyData();
+        teDhenat.postiQeRuaj = posti;
+        teDhenat.ListaMePostimet = listMePoste;
+        return View(teDhenat);
+
     }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

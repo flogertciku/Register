@@ -1,0 +1,13 @@
+@model ManyData
+
+<div class="row">
+    <div class="col-6">
+        <h2>Edit Post</h2>
+        @await Html.PartialAsync("_EditPost",@Model.postiQeRuaj)
+
+    </div>
+    <div class="col-6">
+        @await Html.PartialAsync("_ShowPosts",@Model.ListaMePostimet)
+
+    </div>
+</div>

@@ -1,0 +1,8 @@
+@model Post
+
+<form  method="post" asp-action="EditPost" asp-route-itemid="@Model.PostId">
+    <label asp-for="Content"></label>
+    <input asp-for="Content">
+    <span asp-validation-for="Content"></span>
+    <input type="submit" value="Save">
+</form>
